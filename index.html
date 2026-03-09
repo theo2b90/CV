@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Créatif Moderne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+                h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.7em;
+            font-family: 'Segoe UI', 'Montserrat', Arial, sans-serif;
+            color: #232526;
+            background: rgba(255,255,255,0.92);
+            border-radius: 18px;
+            border: 2.5px solid #667eea;
+            box-shadow: 0 6px 32px #667eea22, 0 1.5px 0 #764ba244;
+            padding: 22px 32px 18px 32px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            position: relative;
+            overflow: visible;
+        }
+        h1::after {
+            content: '';
+            display: block;
+            margin: 18px auto 0 auto;
+            width: 80px;
+            height: 5px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 12px #667eea44;
+            transition: width 0.3s;
+        }
+        h1:hover::after {
+            width: 120px;
+        }
+
+        /* Correction : le titre h1 reste noir (hérite de color: #232526 plus haut) */
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102,126,234,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+        }
+
+        .featured-section {
+            background: white;
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .featured-section h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        /* --- Projets Flip Cards --- */
+        .projects-flip-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .flip-card {
+            background: transparent;
+            width: 260px;
+            height: 210px;
+            perspective: 900px;
+            border-radius: 22px;
+            margin-bottom: 0;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner,
+        .flip-card:focus-within .flip-card-inner {
+            transform: rotateY(180deg) scale(1.045);
+            z-index: 2;
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 22px;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px #667eea33, 0 2px 8px #764ba244;
+        }
+        .flip-card-front {
+            background: #fff;
+            border: 2.5px solid #b4b8f7;
+            padding: 28px 22px 22px 22px;
+            z-index: 2;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-size: cover;
+            background-position: center;
+            border: 2.5px solid #b4b8f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .flip-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .flip-title {
+            font-size: 1.13em;
+            font-weight: 800;
+            color: #232526;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .flip-desc {
+            font-size: 0.99em;
+            color: #555;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        .visit-btn {
+            margin-top: 18px;
+            padding: 10px 28px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 22px;
+            font-weight: 700;
+            font-size: 1em;
+            box-shadow: 0 2px 8px #667eea33;
+            cursor: pointer;
+            transition: background 0.18s, box-shadow 0.18s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .visit-btn:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 4px 16px #764ba244;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .featured-section { padding: 30px; }
+        }
+        .button {
+            cursor: pointer;
+        }
+
+        .bubble {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Théo Suzzoni - Concepteur Développeur</h1>
+        <div class="cards-grid">
+            <div class="card">
+                <h2> 📄 Mon CV</h2>
+                <p>Découvrez mon parcours professionnel, mes expériences et mes compétences clés.</p>
+                <button class="button">En savoir plus</button>
+            </div>
+            <div class="card">
+                <h2>🎯 Mes Objectifs</h2>
+                <p>Développer mes compétences, créer des solutions innovantes et contribuer à des projets impactants.</p>
+                <button class="button">En savoir plus</button>
+            </div>
+            <div class="card">
+                <h2>🛠️ Mes Technologies</h2>
+                <p>Technologies utilisées pour développer mes projets et solutions.</p>
+                <button class="button">En savoir plus</button>
+            </div>
+        </div>
+
+        <div class="featured-section">
+            <h2>Mes Projets</h2>
+            <p>Découvrez quelques-uns de mes projets récents et les technologies utilisées.</p>
+            <div class="projects-flip-grid">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px 10px 10px;min-height:100%;box-sizing:border-box;">
+                            <div class="flip-icon" style="margin-bottom:6px;font-size:1.7em;">🚀</div>
+                            <div class="flip-title" style="font-size:1.08em;font-family:'Montserrat', 'Segoe UI', Arial, sans-serif;font-weight:800;letter-spacing:0.5px;margin-bottom:6px;text-align:center;">FlowForge</div>
+                            <div class="flip-desc" style="font-size:0.93em;line-height:1.35;max-width:175px;text-align:center;font-family:'Segoe UI',Arial,sans-serif;color:#444;font-weight:500;word-break:break-word;">Système pomodoro intelligent et interconnecté</div>
+                        </div>
+                        <div class="flip-card-back" style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80');display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <div style="background:rgba(255,255,255,0.82);color:#232526;font-size:0.98em;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:600;padding:7px 16px 6px 16px;border-radius:16px;margin-bottom:18px;box-shadow:0 2px 8px #667eea22;max-width:90%;text-align:center;">Développement AI assisté par GitHub Copilot (JS natif/HTML/CSS)</div>
+                            <a class="visit-btn" href="https://theo2b90.github.io/FlowForge/" target="_blank" onmouseup="this.blur()">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px 10px 10px;min-height:100%;box-sizing:border-box;">
+                            <div class="flip-icon">⏰</div>
+                            <div class="flip-title" style="font-size:1.08em;font-family:'Montserrat', 'Segoe UI', Arial, sans-serif;font-weight:800;letter-spacing:0.5px;margin-bottom:6px;text-align:center;">Projet 2</div>
+                            <div class="flip-desc" style="font-size:0.93em;line-height:1.35;max-width:175px;text-align:center;font-family:'Segoe UI',Arial,sans-serif;color:#444;font-weight:500;word-break:break-word;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                        </div>
+                        <div class="flip-card-back" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80');display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <a class="visit-btn" href="#" target="_blank" onmouseup="this.blur()">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px 10px 10px;min-height:100%;box-sizing:border-box;">
+                            <div class="flip-icon">🛒</div>
+                            <div class="flip-title" style="font-size:1.08em;font-family:'Montserrat', 'Segoe UI', Arial, sans-serif;font-weight:800;letter-spacing:0.5px;margin-bottom:6px;text-align:center;">Projet 3</div>
+                            <div class="flip-desc" style="font-size:0.93em;line-height:1.35;max-width:175px;text-align:center;font-family:'Segoe UI',Arial,sans-serif;color:#444;font-weight:500;word-break:break-word;">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                        </div>
+                        <div class="flip-card-back" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80');display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <a class="visit-btn" href="#" target="_blank" onmouseup="this.blur()">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px 10px 10px;min-height:100%;box-sizing:border-box;">
+                            <div class="flip-icon">📱</div>
+                            <div class="flip-title" style="font-size:1.08em;font-family:'Montserrat', 'Segoe UI', Arial, sans-serif;font-weight:800;letter-spacing:0.5px;margin-bottom:6px;text-align:center;">Projet 4</div>
+                            <div class="flip-desc" style="font-size:0.93em;line-height:1.35;max-width:175px;text-align:center;font-family:'Segoe UI',Arial,sans-serif;color:#444;font-weight:500;word-break:break-word;">Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
+                        </div>
+                        <div class="flip-card-back" style="background-image: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80');display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <a class="visit-btn" href="#" target="_blank" onmouseup="this.blur()">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px 10px 10px;min-height:100%;box-sizing:border-box;">
+                            <div class="flip-icon">🔒</div>
+                            <div class="flip-title" style="font-size:1.08em;font-family:'Montserrat', 'Segoe UI', Arial, sans-serif;font-weight:800;letter-spacing:0.5px;margin-bottom:6px;text-align:center;">Projet 5</div>
+                            <div class="flip-desc" style="font-size:0.93em;line-height:1.35;max-width:175px;text-align:center;font-family:'Segoe UI',Arial,sans-serif;color:#444;font-weight:500;word-break:break-word;">Duis aute irure dolor in reprehenderit in voluptate velit esse.</div>
+                        </div>
+                        <div class="flip-card-back" style="background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80');display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <a class="visit-btn" href="#" target="_blank" onmouseup="this.blur()">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Théo Suzzoni ; <a href="mailto:theo.suzzoni@hotmail.fr" style="color:inherit;text-decoration:underline;">theo.suzzoni@hotmail.fr</a></p>
+        </footer>
+    </div>
+</body>
+</html>
